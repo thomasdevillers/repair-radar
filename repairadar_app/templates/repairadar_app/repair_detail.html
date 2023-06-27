@@ -1,0 +1,44 @@
+{% extends "repairadar_app/base.html" %}
+{% block content %}
+        <article class="post vt-post custom-border my-4">
+            <div class="row">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                        <div class="media">
+                          <img class="account-img" src="{{ object.repairImage.url }}">
+                        </div>
+                    <div class="author-info author-info-2">
+                        <ul class="list-inline">
+                            <li>
+                                <div class="info">
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="info">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                    <div class="caption">
+                        <h3 class="md-heading">{{ object.repairTitle }}</h3>
+                        <p>{{ object.repairDescription }}</p>
+                        {% if object.repairUrgency == 'Low' %}
+                        <p>Urgency: <strong class="text-success">{{ object.repairUrgency }}</strong></p>
+                        {% elif object.repairUrgency == 'Medium' %}
+                        <p>Urgency: <strong class="text-warning">{{ object.repairUrgency }}</strong></p>
+                        {% else %}
+                        <p>Urgency: <strong class="text-danger">{{ object.repairUrgency }}</strong></p>
+                        {% endif %}
+                        <p>Location: <strong>{{ object.repairLocation }}</strong></p>
+                        <p>Repair Status: <strong>{{ object.repairStatus }}</strong></p>
+                        <p>Date Logged: <strong>{{ object.dateLogged }}</strong></p>
+                        <p>Reported By: <strong>{{ repair.suNumber }}</strong></p>
+                        <a href="{% url 'repair-update' object.pk %}" class="btn btn-primary">Update</a>
+                    </div>                    
+                </div>
+            </div>
+        </article>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "repairadar_app/base.html" %}
+{% block content %}
+    {% for repair in repairs %}
+        <article class="post vt-post custom-border my-4">
+            <div class="row">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                        <div class="media">
+                          <img class="account-img" src="{{ repair.repairImage.url }}">
+                        </div>
+                    <div class="author-info author-info-2">
+                        <ul class="list-inline">
+                            <li>
+                                <div class="info">
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="info">
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="info">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                    <div class="caption">
+                        <a href="{% url 'repair-detail' repair.id %}"><h3 class="md-heading">{{ repair.repairTitle }}</h3></a>
+                        <p>{{ repair.repairDescription }}</p>
+                        {% if repair.repairUrgency == 'Low' %}
+                            <p>Urgency: <strong class="text-success">{{ repair.repairUrgency }}</strong></p>
+                        {% elif repair.repairUrgency == 'Medium' %}
+                            <p>Urgency: <strong class="text-warning">{{ repair.repairUrgency }}</strong></p>
+                        {% else %}
+                            <p>Urgency: <strong class="text-danger">{{ repair.repairUrgency }}</strong></p>
+                        {% endif %}
+                        <p>Location: <strong>{{ repair.repairLocation }}</strong></p>
+                        <p>Repair Status: <strong>{{ repair.repairStatus }}</strong></p>
+                        <p>Date Logged: <strong>{{ repair.dateLogged }}</strong></p>
+                        <p>Reported By: <strong>{{ repair.suNumber }}</strong></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}

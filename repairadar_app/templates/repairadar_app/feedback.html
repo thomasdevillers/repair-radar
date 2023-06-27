@@ -1,0 +1,42 @@
+{%extends "repairadar_app/base.html" %}
+{% block content %}
+    {% for feedback in feedbacks %}
+        <article class="post vt-post custom-border my-4">
+            <div class="row">
+                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4">
+                    <div class="author-info author-info-2">
+                        <ul class="list-inline">
+                            <li>
+                                <div class="info">
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="info">
+
+                                </div>
+                            </li>
+                            <li>
+                                <div class="info">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-8">
+                    <div class="caption">
+                        <h2 class='title'>
+                            <a href="http://{{ feedback.problemLink}}">{{ feedback.problemDescription }}</a>
+                        </h2>
+                        <p> Problem Resolution: <strong> {{ feedback.problemResolution }} <strong></p>
+                        <p> Feedback Timeliness: <strong> {{ feedback.feedbackTime }} <strong></p>
+                        <p> Feedback Communication: <strong> {{ feedback.feedbackCommunication }} <strong></p>
+                        <p> Overal Satisfaction: <strong> {{ feedback.overallSatisfaction }} <strong></p>
+                        <p> Additional Comments: <strong> {{ feedback.additionalComments }} <strong></p>
+                    </div>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+{% endblock %}
