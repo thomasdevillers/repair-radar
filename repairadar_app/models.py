@@ -29,7 +29,7 @@ class Repair(models.Model):
     repairStatus = models.CharField(max_length=20, default='SUB', verbose_name='Issue Status', choices=status_choices)
     repairLocation = models.CharField(max_length=100, verbose_name='Issue Location')
     dateLogged = models.DateField(default = timezone.now)
-    repairImage = models.ImageField(upload_to='repair_images', blank=True, verbose_name='Issue Evidence')
+    repairImage = models.ImageField(upload_to='repair_images', blank=True, verbose_name='Issue Evidence', default='default.jpg')
     repairUrgency = models.CharField(max_length=20, default='Low', verbose_name='Issue Urgency', choices=urgency_choices)
 
     def __str__(self):

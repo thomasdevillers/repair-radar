@@ -38,6 +38,16 @@ class RepairUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+class RepairDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Repair
+    success_url = '/'
+
+    def test_func(self):
+        repair = self.get_object()
+        if self.request.user.username == 'staff' or self.request.user.username == 'tom':
+            return True
+        return False
+
 class FeedbackListView(ListView):
     model = Feedback
     template_name = 'repairadar_app/feedback.html'

@@ -35,7 +35,10 @@
                         <p>Repair Status: <strong>{{ object.repairStatus }}</strong></p>
                         <p>Date Logged: <strong>{{ object.dateLogged }}</strong></p>
                         <p>Reported By: <strong>{{ repair.suNumber }}</strong></p>
+                        <div>
                         <a href="{% url 'repair-update' object.pk %}" class="btn btn-primary">Update</a>
+                        <a href="{% url 'repair-delete' object.pk %}" class="btn btn-danger">Delete</a>
+                        </div>
                     </div>                    
                 </div>
             </div>
