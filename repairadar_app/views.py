@@ -48,6 +48,17 @@ class RepairDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+class UserRepairListView(LoginRequiredMixin, ListView):
+    model = Repair
+    template_name = 'repairadar_app/user_repairs.html'
+    context_object_name = 'repairs'
+    ordering = ['-dateLogged']
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Repair.objects.filter(suNumber=user).order_by('-dateLogged')
+
+
 class FeedbackListView(ListView):
     model = Feedback
     template_name = 'repairadar_app/feedback.html'

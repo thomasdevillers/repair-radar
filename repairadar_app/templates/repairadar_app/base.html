@@ -33,7 +33,7 @@
                     <a class="nav-link" href="{% url 'feedback-create'%}">Submit Feedback</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Active Repairs</a>
+                    <a class="nav-link" href="{% url 'user-repairs' user.username %}">My Active Repairs({{ user.username}})</a>
                 </li>
                 {% endif %}
             </ul>
