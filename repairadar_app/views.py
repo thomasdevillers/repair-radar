@@ -68,4 +68,10 @@ class FeedbackCreateView(LoginRequiredMixin, CreateView):
     model = Feedback
     fields = ['problemDescription', 'resolutionDescription', 'problemLink', 'feedbackTime', 'feedbackCommunication', 'feedbackOverallSatisfaction', 'feedbackAdditional']
 
+class OrderRepairsByUrgencyView(ListView):
+    model = Repair
+    template_name = 'repairadar_app/order_repairs_by_status.html'
+    context_object_name = 'repairs'
+
+
 
