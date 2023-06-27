@@ -38,7 +38,7 @@
                             <p>Urgency: <strong class="text-danger">{{ repair.repairUrgency }}</strong></p>
                         {% endif %}
                         <p>Location: <strong>{{ repair.repairLocation }}</strong></p>
-                        <p>Repair Status: <strong>{{ repair.repairStatus }}</strong></p>
+                        <p>Repair Status: <strong>{{ repair.repairStatus }}</strong> ({{repair.dateLastModified|date:"F d, Y"}})</p>
                         <p>Date Logged: <strong>{{ repair.dateLogged }}</strong></p>
                         <p>Reported By: <strong>{{ repair.suNumber }}</strong></p>
                     </div>

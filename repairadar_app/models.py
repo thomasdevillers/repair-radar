@@ -28,6 +28,7 @@ class Repair(models.Model):
     repairDescription = models.TextField(verbose_name='Issue Description')
     repairStatus = models.CharField(max_length=20, default='SUB', verbose_name='Issue Status', choices=status_choices)
     repairLocation = models.CharField(max_length=100, verbose_name='Issue Location')
+    dateLastModified = models.DateField(default = timezone.now)
     dateLogged = models.DateField(default = timezone.now)
     repairImage = models.ImageField(upload_to='repair_images', blank=True, verbose_name='Issue Evidence', default='default.jpg')
     repairUrgency = models.CharField(max_length=20, default='Low', verbose_name='Issue Urgency', choices=urgency_choices)
@@ -37,6 +38,15 @@ class Repair(models.Model):
     
     def get_absolute_url(self):
         return reverse('repair-detail', kwargs={'pk': self.pk})
+    
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            self.dateLastModified = timezone.now()  # Set initial last_modified value on creation
+        else:
+            original = Repair.objects.get(pk=self.pk)
+            if original.repairStatus != self.repairStatus:
+                self.dateLastModified = timezone.now()  # Update last_modified if the status has changed
+        super().save(*args, **kwargs)
 
 class Feedback(models.Model):
 
