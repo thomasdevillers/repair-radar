@@ -8,3 +8,12 @@ img {
     height: 320px;
     object-fit: cover;
 }
+
+.faq-question {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.faq-answer {
+    display: none;
+}

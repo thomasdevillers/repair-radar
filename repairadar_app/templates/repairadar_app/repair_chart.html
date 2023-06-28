@@ -1,0 +1,45 @@
+{% extends "repairadar_app/base.html" %}
+{% block content %}
+<button id="toggleButton" class="btn btn-primary mt-3">Toggle Charts Type</button>
+
+<h2 class="mt-2">Distribution of Current Repairs Status</h2>
+<canvas id="status_counter" width="1000" height="500"></canvas>
+<script>
+    let currentChartType = 'bar';
+    const dataStatus = {{ status_count|safe }};
+    const ctxStatus = document.getElementById('status_counter').getContext('2d');
+    const myChartStatus = new Chart(ctxStatus, {
+        type: currentChartType,
+        data: {		
+            labels: Object.keys(dataStatus),
+            datasets: [
+                {
+                    label: 'Current Repairs Status',
+                    data: Object.values(dataStatus),
+                },
+            ],
+        },
+        options: {}
+    });
+</script>
+
+<h2 class="mt-2">Distribution of Current Repairs Urgency</h2>
+<canvas id="urgency_counter" width="1000" height="500"></canvas>
+<script>
+    const dataUrgency = {{ urgency_count|safe }};
+    const ctxUrgency = document.getElementById('urgency_counter').getContext('2d');
+    const myChartUrgency = new Chart(ctxUrgency, {
+        type: currentChartType,
+        data: {		
+            labels: Object.keys(dataUrgency),
+            datasets: [
+                {
+                    label: 'Current Repairs Urgency',
+                    data: Object.values(dataUrgency),
+                },
+            ],
+        },
+        options: {}
+    });
+</script>
+{% endblock %}

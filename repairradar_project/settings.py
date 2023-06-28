@@ -142,3 +142,4 @@ EMAIL_HOST_PASSWORD = 'rsxjvojcbbmplnbu'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'repairadar-home'
+LOGIN_URL = 'login'

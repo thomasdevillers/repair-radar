@@ -74,3 +74,6 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.problemDescription
+    
+    def get_absolute_url(self):
+        return reverse('feedback-detail', kwargs={'pk': self.pk})

@@ -1,13 +1,16 @@
 {% extends "repairadar_app/base.html" %}
 {% block content %}
+<button id="toggleButton" class="btn btn-primary mt-3">Toggle Charts Type</button>
+
 
 <h2 class="mt-2">Overall Satisfaction Of Users</h2>
 <canvas id="overall_rating" width="1000" height="600"></canvas>
 <script>
+    let currentChartType = 'bar';
     const dataOverall = {{ ratings_count_overall|safe }};
     const ctxOverall = document.getElementById('overall_rating').getContext('2d');
     const myChartOverall = new Chart(ctxOverall, {
-        type: 'bar',
+        type: currentChartType,
         data: {		
             labels: Object.keys(dataOverall),
             datasets: [
@@ -20,7 +23,7 @@
         options: {}
     });
 </script>
-
+<div class='mt-5'></div>
 <h2 class="mt-2">Overall Timeliness of Repair</h2>
 <canvas id="time_rating" width="1000" height="600"></canvas>
 <script>
@@ -32,8 +35,28 @@
             labels: Object.keys(dataTime),
             datasets: [
                 {
-                    label: 'Overall Timliness of Repairs',
+                    label: 'Overall Timeliness of Repairs',
                     data: Object.values(dataTime),
+                },
+            ],
+        },
+        options: {}
+    });
+</script>
+<div class='mt-5'></div>
+<h2 class="mt-2">Overall Communication From Staff</h2>
+<canvas id="communication_rating" width="1000" height="600"></canvas>
+<script>
+    const dataCommunication = {{ ratings_count_communication|safe }};
+    const ctxCommunication = document.getElementById('communication_rating').getContext('2d');
+    const myChartCommunication = new Chart(ctxCommunication, {
+        type: 'bar',
+        data: {		
+            labels: Object.keys(dataCommunication),
+            datasets: [
+                {
+                    label: 'Overall Communication From Staff',
+                    data: Object.values(dataCommunication),
                 },
             ],
         },

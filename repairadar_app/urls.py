@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import resolution_chart, RepairListView, RepairDetailView, RepairCreateView, RepairUpdateView, RepairDeleteView, FeedbackCreateView, FeedbackListView, UserRepairListView, RepairUpdateView, RepairDeleteView, OrderRepairsByUrgencyView
+from .views import resolutionChart,repairChart, faq, UncompleteRepairsView, RepairListView, RepairDetailView, RepairCreateView, RepairUpdateView, RepairDeleteView, FeedbackCreateView, FeedbackListView, FeedbackDetailView, UserRepairListView, RepairUpdateView, RepairDeleteView, OrderRepairsByUrgencyView
 
 urlpatterns = [
     path('', RepairListView.as_view(), name='repairadar-home'),
@@ -10,7 +10,12 @@ urlpatterns = [
     path('repair/<int:pk>/delete/', RepairDeleteView.as_view(), name='repair-delete'),
     path('user/<str:username>', UserRepairListView.as_view(), name="user-repairs"),
     path('feedback/', FeedbackListView.as_view(), name='repair-feedback'),
+    path('feedback/<int:pk>/', FeedbackDetailView.as_view(), name='feedback-detail'),
     path('feedback/create', FeedbackCreateView.as_view(), name='feedback-create'),
     path('orderbyurgency/', OrderRepairsByUrgencyView.as_view(), name='order-by-urgency'),
-    path('resolution_chart/', resolution_chart, name='resolution-chart')
+    path('uncomplete-repairs/', UncompleteRepairsView.as_view(), name='uncomplete-repairs'),
+    path('resolution_chart/', resolutionChart, name='resolution-chart'),
+    path('repair_chart/', repairChart, name='repair-chart'),
+    path('faq/', faq, name='faq'),
+
 ]

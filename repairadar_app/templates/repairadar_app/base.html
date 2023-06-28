@@ -11,46 +11,47 @@
         <title>Repair Radar</title>
     {% endif %}
     <link rel="stylesheet" href="{% static 'repairadar_app/main.css' %}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src=" https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js "></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'repairadar-home' %}">Repair Radar</a>
-            
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'repairadar-home' %}">Active Repairs</a>
-                </li>
-                {% if user.username == 'staff'%}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'repair-feedback' %}">View Feedback</a>
-                </li>
-                {% endif %}
-                {% if user.is_authenticated and user.username != 'staff' %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'feedback-create'%}">Submit Feedback</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-repairs' user.username %}">My Active Repairs({{ user.username}})</a>
-                </li>
-                {% endif %}
-            </ul>
-            
-            <div class="d-flex">
-                {% if user.is_authenticated %}
-                {% if user.username != 'staff'%}
-                <a href="{% url 'repair-create' %}"><button class="btn btn-primary me-2" type="button">Log A Repair</button></a>
-                {% endif %}
-                <a href="{% url 'logout' %}"><button class="btn btn-secondary ml-2" type="button">Logout</button></a>
-                {% else %}
-                <a href="{% url 'login' %}"><button class="btn btn-primary me-2" type="button">Login</button></a>
-                {% endif %}
-            </div>
+                <a class="navbar-brand" href="{% url 'repairadar-home' %}">Repair Radar</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'repairadar-home' %}">Active Repairs</a>
+                    </li>
+                    {% if user.username == 'staff'%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'repair-feedback' %}">View Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'repair-chart' %}>Repair Stats </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'resolution-chart' %}>Resolution Stats </a>
+                    </li>
+                    {% endif %}
+                    {% if user.is_authenticated and user.username != 'staff' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'user-repairs' user.username %}">My Active Repairs({{ user.username}})</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                
+                <div class="d-flex justify-content-end">
+                    {% if user.is_authenticated %}
+                    {% if user.username != 'staff'%}
+                    <a href={% url 'feedback-create'%}><button class="btn btn-primary mr-2" type="button">Submit Feedback</button></a>
+                    <a href="{% url 'repair-create' %}"><button class="btn btn-primary me-2" type="button">Log A Repair</button></a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}"><button class="btn btn-secondary ml-2" type="button">Logout</button></a>
+                    {% else %}
+                    <a href="{% url 'login' %}"><button class="btn btn-primary me-2" type="button">Login</button></a>
+                    {% endif %}
+                </div>
         </div>
     </nav>
     <div class='container vertical-center'>
