@@ -1,7 +1,7 @@
 {% extends "repairadar_app/base.html" %}
 {% block content %}
 <form method="GET" action="{% url 'order-by-urgency' %}">
-    <button type="submit">Order By Urgency</button>
+    <button type="submit" class="btn btn-primary mt-3">Order By Urgency</button>
 </form>
     {% for repair in repairs %}
         <article class="post vt-post custom-border my-4">

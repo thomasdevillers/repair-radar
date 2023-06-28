@@ -73,5 +73,32 @@ class OrderRepairsByUrgencyView(ListView):
     template_name = 'repairadar_app/order_repairs_by_status.html'
     context_object_name = 'repairs'
 
+def resolution_chart(request):
+    feedbacks = Feedback.objects.all()
+    ratings_count_overall = {
+        '5 Stars': 0,
+        '4 Stars': 0,
+        '3 Stars': 0,
+        '2 Stars': 0,
+        '1 Star': 0
+    }
+
+    for feedback in feedbacks:
+        ratings_count_overall[feedback.feedbackOverallSatisfaction] += 1
+    
+    ratings_count_time = {
+        'Longer Than Expected': 0,
+        'Reasonable Amount Of Time': 0,
+        'Promptly Resolved': 0,
+    }
+
+    for feedback in feedbacks:
+        ratings_count_time[feedback.feedbackTime] += 1
+
+    context = {
+        'ratings_count_overall': ratings_count_overall,
+        'ratings_count_time': ratings_count_time
+    }
+    return render(request, 'repairadar_app/resolution_chart.html', context=context)
 
 

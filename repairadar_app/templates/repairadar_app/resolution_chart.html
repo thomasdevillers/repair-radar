@@ -1,0 +1,45 @@
+{% extends "repairadar_app/base.html" %}
+{% block content %}
+
+<h2 class="mt-2">Overall Satisfaction Of Users</h2>
+<canvas id="overall_rating" width="1000" height="600"></canvas>
+<script>
+    const dataOverall = {{ ratings_count_overall|safe }};
+    const ctxOverall = document.getElementById('overall_rating').getContext('2d');
+    const myChartOverall = new Chart(ctxOverall, {
+        type: 'bar',
+        data: {		
+            labels: Object.keys(dataOverall),
+            datasets: [
+                {
+                    label: 'Overall Satisfaction Of Customers',
+                    data: Object.values(dataOverall),
+                },
+            ],
+        },
+        options: {}
+    });
+</script>
+
+<h2 class="mt-2">Overall Timeliness of Repair</h2>
+<canvas id="time_rating" width="1000" height="600"></canvas>
+<script>
+    const dataTime = {{ ratings_count_time|safe }};
+    const ctxTime = document.getElementById('time_rating').getContext('2d');
+    const myChartTime = new Chart(ctxTime, {
+        type: 'bar',
+        data: {		
+            labels: Object.keys(dataTime),
+            datasets: [
+                {
+                    label: 'Overall Timliness of Repairs',
+                    data: Object.values(dataTime),
+                },
+            ],
+        },
+        options: {}
+    });
+</script>
+
+{% endblock %}
+
